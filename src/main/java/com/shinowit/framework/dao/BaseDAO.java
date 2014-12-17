@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @SuppressWarnings("unchecked")
+
 @Repository
 public class BaseDAO<T> {
 
@@ -76,6 +77,8 @@ public class BaseDAO<T> {
         }
         return result;
     }
+
+
 
 
     public T findById(Class<?> c, Serializable id) {
@@ -210,6 +213,41 @@ public class BaseDAO<T> {
         }
 
         return list;
+    }
+
+    public List<T> myFindByHql(String hql, final Object... objects) {
+        List<T> list = null;
+        Session session = null;
+        try {
+            session = sessionFactory.getCurrentSession();
+            Query query = session.createQuery(hql);
+            for (int i = 0; i < objects.length; i++) {
+                query.setParameter(i, objects[i]);
+            }
+            list = query.list();
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+        return list;
+    }
+
+
+    @Transactional
+    public int extcuteHQL(String hql,Object ...params) throws HibernateException {
+        Session session = null;
+        int result = 0;
+        try {
+            session = sessionFactory.getCurrentSession();
+            Query query=session.createQuery(hql);
+            for(int i=0;i<params.length;i++){
+                query.setParameter(i,params[i]);
+            }
+            result=query.executeUpdate();
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw new HibernateException(e);
+        }
+        return result;
     }
 }
 
