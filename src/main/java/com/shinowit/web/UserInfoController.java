@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
@@ -17,11 +22,71 @@ public class UserInfoController {
     private BaseDAO<UserEntity> stu_dao;
 
     @RequestMapping("/test")
-    public ModelAndView displayAll(){
-        List<UserEntity> userList=stu_dao.listAll(UserEntity.class);
-        ModelAndView result=new ModelAndView("/userinfo/test");
-        result.addObject("user_data_list",userList);
+    public ModelAndView displayAll() {
+        List<UserEntity> userList = stu_dao.listAll(UserEntity.class);
+        ModelAndView result = new ModelAndView("/userinfo/test");//view，对应userinfo/test.jsp
+        result.addObject("user_data_list", userList);//Model
         return result;
     }
+
+    /**
+     * ***************************原生servlet访问示例一***********************************
+     */
+    @Resource
+    private ServletContext application;//application特殊，必须注入
+
+    @RequestMapping("/test1")
+    public ModelAndView testNativeObject(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+        ModelAndView result = new ModelAndView("/userinfo/test1");
+        result.addObject("req_uri", request.getRequestURI());
+        result.addObject("resp", response.getCharacterEncoding());
+        result.addObject("sid", session.getId());
+        result.addObject("app_path", application.getRealPath("/"));
+        return result;
+    }
+
+    /**
+     * ******************GET/POST请求方式参数自动绑定到单个变量:GET方式***************************
+     */
+    @RequestMapping("/test2")
+    public ModelAndView testParams(String username, String userpass) {
+        ModelAndView result = new ModelAndView("/userinfo/test2");
+        try {
+            result.addObject("username", new String(username.getBytes("ISO-8859-1"), "utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            result.addObject("userpass", new String(userpass.getBytes("ISO-8859-1"), "utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    /**
+     * ******************GET/POST请求方式参数自动绑定到单个变量:POST方式(模拟登陆)***************************
+     */
+    @RequestMapping("/test3")
+    public String testParams2(String userName, String userPass) {
+        ModelAndView result = new ModelAndView("/userinfo/test3");
+        result.addObject("username", userName);
+        result.addObject("userpass", userPass);
+        List<UserEntity> userList = stu_dao.myFindByHql("from UserEntity where userName=?", userName);
+        if (userList.size() > 0) {
+            for (UserEntity userinfo : userList) {
+                if (userinfo.getUserName().equals(userName) && userinfo.getUserPass().equals(userPass)) {
+                    return "/userinfo/test3";
+                }else{
+                    return "/userinfo/fail";
+                }
+            }
+        }
+        return "/userinfo/fail";
+    }
+
+
+
 }
 
