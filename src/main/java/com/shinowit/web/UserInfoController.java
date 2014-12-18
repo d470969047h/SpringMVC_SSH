@@ -72,6 +72,8 @@ public class UserInfoController {
      * ******************GET/POST请求方式参数自动绑定到单个变量:POST方式(模拟登陆)***************************
      * *@RequestParam("loginName")在用get请求时可以改变参数名，哈哈
      * *@RequestParam("loginName")请求的是实体类对象的话必须和对象的属性一样，不能变！
+     * *@RequestParam注解的参数缺省下http request中必须要提供，否则会出错，可以增加required=false来解决这个问题，例如:
+     * *  @RequestParam(value = "name",required = false)
      * *
      */
     @RequestMapping("/test3")

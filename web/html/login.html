@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
+    <title></title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnlogin").click(function () {
+                login();
+            });
+        });
+        function login() {
+            var my_json_data = '{"userName":"' + $('#userName').val() + '","userPass":"'
+                    + $('#userPass').val() + '"}';
+            $.ajaxSetup({
+                contentType: 'application/json'
+            });
+            $.post('http://localhost:8080/login/login', my_json_data,
+                    function (data) {
+                        alert("userName: " + data.userName + "\nuserPass: " + data.userPass);
+                    }, 'json');
+        }
+    </script>
+</head>
+<body>
+<form action="/login/login" method="post">
+    <label>username</label><input type="text" name="userName" id="userName"/>
+    <label>userpass</label><input type="text" name="userPass" id="userPass"/>
+    <input type="button" value="登录" id="btnlogin"/>
+</form>
+</body>
+</html>
