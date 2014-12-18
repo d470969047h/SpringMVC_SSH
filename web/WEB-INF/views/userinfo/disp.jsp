@@ -12,11 +12,13 @@
     <title></title>
 </head>
 <body>
-<c:forEach items="${uesrTea_data_List}">
-    <label>ID:</label>${userInfo.userId}<br>
-    <label>用户名:</label>${userInfo.userName}<br>
-    <label>密码:</label>${userInfo.userPass}<br>
-    <label>教师:</label>${teacher.userPass}<br>
+<c:forEach items="${uesrTea_data_List1}" var="user" >
+    <label>ID:</label>${user.userId}
+    <label>用户名:</label>${user.userName}
+    <label>密码:</label>${user.userPass}<br>
+</c:forEach>
+<c:forEach items="${uesrTea_data_List2}" var="tea">
+    <label>教师:</label>${tea.teaName}<br>
 </c:forEach>
 </body>
 </html>
