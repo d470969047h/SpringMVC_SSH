@@ -13,8 +13,8 @@
 </head>
 <body>
 <form action="/userinfo/test3" method="post">
-<label>用户名：</label><input type="text" name="userName"/>
-<label>密码：</label><input type="password" name="userPass"/>
+<label>用户名：</label><input type="text" name="loginName"/>
+<label>密码：</label><input type="password" name="loginPass"/>
     <input type="submit" value="提交"/>
 </form>
 </body>

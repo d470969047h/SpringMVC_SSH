@@ -4,6 +4,7 @@ import com.shinowit.entity.UserEntity;
 import com.shinowit.framework.dao.BaseDAO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -47,9 +48,11 @@ public class UserInfoController {
 
     /**
      * ******************GET/POST请求方式参数自动绑定到单个变量:GET方式***************************
+     * *@RequestParam("loginName")在用get请求时可以改变参数名，哈哈
+     * *@RequestParam("loginName")请求的是实体类对象的话必须和对象的属性一样，不能变！
      */
     @RequestMapping("/test2")
-    public ModelAndView testParams(String username, String userpass) {
+    public ModelAndView testParams(@RequestParam("loginName")String username, @RequestParam("loginPass")String userpass) {
         ModelAndView result = new ModelAndView("/userinfo/test2");
         try {
             result.addObject("username", new String(username.getBytes("ISO-8859-1"), "utf-8"));
@@ -67,9 +70,12 @@ public class UserInfoController {
 
     /**
      * ******************GET/POST请求方式参数自动绑定到单个变量:POST方式(模拟登陆)***************************
+     * *@RequestParam("loginName")在用get请求时可以改变参数名，哈哈
+     * *@RequestParam("loginName")请求的是实体类对象的话必须和对象的属性一样，不能变！
+     * *
      */
     @RequestMapping("/test3")
-    public String testParams2(String userName, String userPass) {
+    public String testParams2(@RequestParam("loginName")String userName, @RequestParam("loginPass")String userPass) {
         ModelAndView result = new ModelAndView("/userinfo/test3");
         result.addObject("username", userName);
         result.addObject("userpass", userPass);
