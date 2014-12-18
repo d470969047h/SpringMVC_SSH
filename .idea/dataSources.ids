@@ -2372,6 +2372,11 @@
       <column name="city_Name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="city_Id"/>
     </table>
+    <table name="teacher" schema="" catalog="test" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="teaName" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
     <table name="title" schema="" catalog="test" type="TABLE">
       <column name="title_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>

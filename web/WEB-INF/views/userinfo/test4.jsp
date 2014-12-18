@@ -12,9 +12,12 @@
     <title></title>
 </head>
 <body>
-    <label>用户名ID:</label>${userInfo.userId}
-    <label>用户名:</label>${userInfo.userName}<br>
-    <label>密码:</label>${userInfo.userPass}<br>
-    <label>教师姓名:</label>${teacher.teaName}<br>
+ <form action="/userinfo/test4" method="post">
+     <label>用户名ID:</label><input type="text" name="userInfo.userId"/><br>
+     <label>用户名:</label><input type="text" name="userInfo.userName"/><br>
+     <label>密码:</label><input type="text" name="userInfo.userPass"/><br>
+     <label>教师姓名:</label><input type="text" name="teacher.teaName"/><br>
+     <input type="submit" value="提交"/>
+ </form>
 </body>
 </html>
