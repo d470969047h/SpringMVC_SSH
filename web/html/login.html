@@ -11,22 +11,23 @@
             });
         });
         function login() {
-            var my_json_data = '{"userName":"' + $('#userName').val() + '","userPass":"'
+            var my_json_data = '{"userId":"'+$('#userId').val()+'","userName":"' + $('#userName').val() + '","userPass":"'
                     + $('#userPass').val() + '"}';
             $.ajaxSetup({
                 contentType: 'application/json'
             });
             $.post('http://localhost:8080/login/login', my_json_data,
                     function (data) {
-                        alert("userName: " + data.userName + "\nuserPass: " + data.userPass);
+                        alert("用户ID："+data.userId+"\n用户名: " + data.userName + "\n密码: " + data.userPass);
                     }, 'json');
         }
     </script>
 </head>
 <body>
 <form action="/login/login" method="post">
-    <label>username</label><input type="text" name="userName" id="userName"/>
-    <label>userpass</label><input type="text" name="userPass" id="userPass"/>
+    <label>用户ID：</label><input type="text" name="userId" id="userId"/>
+    <label>用户名：</label><input type="text" name="userName" id="userName"/>
+    <label>密码：</label><input type="password" name="userPass" id="userPass"/>
     <input type="button" value="登录" id="btnlogin"/>
 </form>
 </body>
