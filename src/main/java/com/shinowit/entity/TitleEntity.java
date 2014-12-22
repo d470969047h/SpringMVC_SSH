@@ -31,23 +31,4 @@ public class TitleEntity {
         this.title = title;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TitleEntity that = (TitleEntity) o;
-
-        if (titleId != that.titleId) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = titleId;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        return result;
-    }
 }
