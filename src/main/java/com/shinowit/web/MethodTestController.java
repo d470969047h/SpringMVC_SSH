@@ -2,8 +2,6 @@ package com.shinowit.web;
 
 import com.shinowit.entity.UserEntity;
 import com.shinowit.framework.dao.BaseDAO;
-import org.apache.commons.fileupload.RequestContext;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -17,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.spi.http.HttpContext;
 import java.util.List;
 import java.util.Map;
 
@@ -77,12 +74,8 @@ public class MethodTestController {
 
     @RequestMapping(value = "/method5")
     public String testForeach(HttpServletRequest request,HttpSession session){
-
-
         request.setAttribute("a1","the data in request");
         session.setAttribute("a1","the data in session");
-
-
          return "/test4";
     }
 }

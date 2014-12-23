@@ -15,7 +15,7 @@
 <label STYLE="font-size: 14pt">GET/POST请求方式参数自动绑定到单个变量:POST（模拟登楼）</label><br>
 登陆成功！
 <label>欢迎：</label>
-    <label style="color: red">${username}</label>
+    <label style="color: red">${err_msg}</label>
 </form>
 </body>
 </html>

@@ -52,7 +52,7 @@ public class UserInfoController {
      * *@RequestParam("loginName")请求的是实体类对象的话必须和对象的属性一样，不能变！
      */
     @RequestMapping("/test2")
-    public ModelAndView testParams(@RequestParam("loginName")String username, @RequestParam("loginPass")String userpass) {
+    public ModelAndView testParams(@RequestParam("loginName") String username, @RequestParam("loginPass") String userpass) {
         ModelAndView result = new ModelAndView("/userinfo/test2");
         try {
             result.addObject("username", new String(username.getBytes("ISO-8859-1"), "utf-8"));
@@ -77,24 +77,23 @@ public class UserInfoController {
      * *
      */
     @RequestMapping("/test3")
-    public String testParams2(@RequestParam("loginName")String userName, @RequestParam("loginPass")String userPass) {
+    public String testParams2(@RequestParam("loginName") String userName, @RequestParam("loginPass") String userPass, HttpServletRequest request) {
         ModelAndView result = new ModelAndView("/userinfo/test3");
-        result.addObject("username", userName);
-        result.addObject("userpass", userPass);
+        result.addObject("userName", userName);
+        result.addObject("userPass", userPass);
         List<UserEntity> userList = stu_dao.myFindByHql("from UserEntity where userName=?", userName);
         if (userList.size() > 0) {
             for (UserEntity userinfo : userList) {
                 if (userinfo.getUserName().equals(userName) && userinfo.getUserPass().equals(userPass)) {
+                    //向session中存入一个状态
+                    request.getSession(true).setAttribute("login_status", true);
+                    request.setAttribute("err_msg",userinfo.getUserName());
                     return "/userinfo/test3";
-                }else{
+                } else {
                     return "/userinfo/fail";
                 }
             }
         }
         return "/userinfo/fail";
     }
-
-
-
 }
-

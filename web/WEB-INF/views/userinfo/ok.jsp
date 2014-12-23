@@ -12,7 +12,6 @@
     <title></title>
 </head>
 <body>
-${key}
 ${userEntity.userName}
 ${userEntity.userPass}
 成功！

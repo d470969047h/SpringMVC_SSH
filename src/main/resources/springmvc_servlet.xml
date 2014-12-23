@@ -61,11 +61,12 @@
     <mvc:resources mapping="/html/**" location="/html/"/>
     <mvc:resources mapping="/upload/**" location="/upload/"/>
 
-    <!--
+
+    <!--配置拦截器-->
     <mvc:interceptors>
-        <bean class="com.ddt.web.admin.LoginStatusIntercepter" />
+        <bean class="com.shinowit.framework.interceptor.CheckLoginInterceptor" />
     </mvc:interceptors>
-    -->
+
 
     <!-- jsp页面解析器，当Controller返回XXX字符串时，先通过拦截器，然后该类就会在/WEB-INF/views/目录下，查找XXX.jsp文件 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
