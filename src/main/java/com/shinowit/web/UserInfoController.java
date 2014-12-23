@@ -67,7 +67,6 @@ public class UserInfoController {
         return result;
     }
 
-
     /**
      * ******************GET/POST请求方式参数自动绑定到单个变量:POST方式(模拟登陆)***************************
      * *@RequestParam("loginName")在用get请求时可以改变参数名，哈哈
